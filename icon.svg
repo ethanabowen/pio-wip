@@ -1,0 +1,30 @@
+<svg height="128" width="128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="128" height="128" fill="url(#gradient)" rx="16" ry="16"/>
+  
+  <!-- Isometric cube -->
+  <g transform="translate(64, 40)">
+    <!-- Top face -->
+    <polygon points="0,0 -24,12 0,24 24,12" fill="#ecf0f1" stroke="#34495e" stroke-width="2"/>
+    
+    <!-- Left face -->
+    <polygon points="0,24 -24,36 -24,60 0,48" fill="#bdc3c7" stroke="#34495e" stroke-width="2"/>
+    
+    <!-- Right face -->
+    <polygon points="0,24 24,36 24,60 0,48" fill="#95a5a6" stroke="#34495e" stroke-width="2"/>
+  </g>
+  
+  <!-- Clock overlay -->
+  <g transform="translate(64, 80)">
+    <circle cx="0" cy="0" r="16" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+    <line x1="0" y1="-10" x2="0" y2="0" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="0" x2="8" y2="0" stroke="#ffffff" stroke-width="2"/>
+  </g>
+</svg>
