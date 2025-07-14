@@ -1,0 +1,137 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6vjrjwpqj4u4"]
+
+[ext_resource type="Script" path="res://scripts/TimeManager.gd" id="1_8gkj4"]
+[ext_resource type="Script" path="res://scripts/IsometricTileMap.gd" id="2_5nj8r"]
+[ext_resource type="Script" path="res://scripts/PlayerController.gd" id="3_7md9c"]
+[ext_resource type="Script" path="res://components/TimeUI.gd" id="4_2vqn5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": "idle_down",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_1"]
+
+[node name="Main" type="Node2D"]
+
+[node name="TimeManager" type="Node" parent="."]
+script = ExtResource("1_8gkj4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+zoom = Vector2(0.5, 0.5)
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+script = ExtResource("2_5nj8r")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(640, 360)
+script = ExtResource("3_7md9c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("SpriteFrames_1")
+animation = &"idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TimeUI" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = -10.0
+grow_vertical = 0
+script = ExtResource("4_2vqn5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/TimeUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource("Theme_1")
+
+[node name="TimeLabel" type="Label" parent="UI/TimeUI/VBoxContainer"]
+layout_mode = 2
+text = "Time: 0.00"
+horizontal_alignment = 1
+
+[node name="StateLabel" type="Label" parent="UI/TimeUI/VBoxContainer"]
+layout_mode = 2
+text = "State: Normal"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/TimeUI/VBoxContainer"]
+layout_mode = 2
+max_value = 60.0
+step = 0.1
+value = 0.0
+
+[node name="ButtonContainer" type="HBoxContainer" parent="UI/TimeUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="RewindButton" type="Button" parent="UI/TimeUI/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = "<<"
+
+[node name="PauseButton" type="Button" parent="UI/TimeUI/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = "Pause"
+
+[node name="ForwardButton" type="Button" parent="UI/TimeUI/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = ">>"
+
+[node name="ResetButton" type="Button" parent="UI/TimeUI/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = "Reset"
+
+[node name="InfoUI" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 200.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InfoUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TitleLabel" type="Label" parent="UI/InfoUI/VBoxContainer"]
+layout_mode = 2
+text = "Isometric Time Map"
+horizontal_alignment = 1
+
+[node name="InstructionsLabel" type="Label" parent="UI/InfoUI/VBoxContainer"]
+layout_mode = 2
+text = "Controls:
+WASD - Move
+Space - Pause/Resume Time
+Q - Rewind Time
+E - Fast Forward Time
+
+Click tiles to interact"
+vertical_alignment = 1
+
+[node name="PositionLabel" type="Label" parent="UI/InfoUI/VBoxContainer"]
+layout_mode = 2
+text = "Position: (0, 0)"
+horizontal_alignment = 1
